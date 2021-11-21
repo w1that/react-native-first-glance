@@ -33,7 +33,7 @@ export default function App() {
       fontWeight: "bold",
       paddingVertical: 20,
       marginHorizontal: 10,
-      fontFamily:'sans-serif'
+      fontFamily: "sans-serif",
     },
     categoryButton: {
       backgroundColor: "white",
@@ -65,18 +65,16 @@ export default function App() {
       marginBottom: 10,
     },
     productImage: {
-      width: 220,
-      height: 400,
+      width: 200,
+      height: 300,
       borderRadius: 20,
-      borderWidth: 1,
-      borderColor: "black",
+      borderWidth:1,
+      borderColor:"gray"
     },
-    productName: {
-      paddingVertical: 10,
-      color: "black",
-    },
-    productPrice: {
-      color: "black",
+    productItem: {
+      marginHorizontal: 10,
+      backgroundColor:"#f0f0f0", 
+      borderRadius:30,
     },
   });
 
@@ -121,7 +119,7 @@ export default function App() {
       </View>
 
       {/* categories */}
-      <SafeAreaView>
+      <View>
         <ScrollView
           style={styles.categoriesView}
           horizontal={true}
@@ -149,40 +147,30 @@ export default function App() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </SafeAreaView>
+      </View>
       {/* products */}
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          justifyContent="center"
-        >
+
+      <View>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {products.map((product) => {
             return (
-              <View key={product.id}>
+              <TouchableOpacity activeOpacity={0.7} style={styles.productItem}>
+                <Image
+                  resizeMode="cover"
+                  style={styles.productImage}
+                  source={product.imagePath}
+                ></Image>
                 <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                  }}
+                  style={{ justifyContent: "center", alignItems: "center", padding:10, }}
                 >
-                  <TouchableOpacity activeOpacity={0.7}>
-                    <Image
-                      style={styles.productImage}
-                      source={product.imagePath}
-                      resizeMode="cover"
-                    ></Image>
-                  </TouchableOpacity>
-                  <Text style={styles.productName}>{product.productName}</Text>
-                  <Text style={styles.productPrice}>${product.price}</Text>
+                  <Text>{product.productName}</Text>
+                  <Text style={{fontWeight:"bold"}}>${product.price}</Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </ScrollView>
-
-      <ScrollView>
-        <Text>asdasdas</Text>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
