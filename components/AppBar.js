@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Image,
+  SafeAreaView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -9,56 +10,63 @@ import {
 
 export default function AppBar() {
   const styles = StyleSheet.create({
+    appbarContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
     logos: {
       width: 30,
       height: 30,
       marginLeft: 10,
       marginRight: 10,
     },
+    searchBar: {
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: focused ? "black" : "gray",
+      paddingHorizontal: 10,
+      fontSize: 16,
+      paddingVertical: 5,
+      maxWidth: 180,
+      minWidth: 180,
+      height: 50,
+    },
+    rightSide: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    leftSide: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    container: {
+        paddingTop: 50,
+      },
   });
 
   const [focused, setFocused] = useState(false);
   return (
-    <View
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
+    <SafeAreaView style={styles.container}>
+    <View style={styles.appbarContainer}>
       <TouchableOpacity>
         <Image
           style={styles.logos}
           source={require("../assets/threelines.png")}
         ></Image>
       </TouchableOpacity>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <View style={styles.leftSide}>
         <TextInput
           placeholder="search"
           keyboardType="default"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          style={{
-            borderRadius: 10,
-            borderWidth: 1,
-            borderColor: focused ? "black" : "gray",
-            paddingHorizontal: 10,
-            fontSize: 16,
-            paddingVertical: 5,
-            maxWidth: 180,
-            minWidth: 180,
-            height: 50,
-          }}
+          style={styles.searchBar}
         />
       </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={styles.rightSide}>
         <TouchableOpacity>
           <Image
             style={styles.logos}
@@ -73,5 +81,6 @@ export default function AppBar() {
         </TouchableOpacity>
       </View>
     </View>
+    </SafeAreaView>
   );
 }

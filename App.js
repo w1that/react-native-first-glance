@@ -1,39 +1,30 @@
-import React, { useState } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import AppBar from "./components/AppBar";
-import popularProducts from "./data/popularProducts";
-import products from "./data/products";
-import Categories from "./components/Categories";
-import PopularProducts from "./components/PopularProducts";
-import Products from "./components/Products";
 import Home from "./screens/Home";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import ProductDetail from "./screens/ProductDetail";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const styles = StyleSheet.create({
-   
-    container: {
-      paddingTop: 50,
-    },
-    
-    
-  });
-
-  
+  const styles = StyleSheet.create({});
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <AppBar/>      
-        <Home/>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      {/*  */}
+      
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Product Detail" component={ProductDetail} />
+      </Stack.Navigator>
+      {/* </SafeAreaView> */}
+    </NavigationContainer>
   );
 }

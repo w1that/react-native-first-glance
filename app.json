@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "firstGlance",
-    "slug": "firstGlance",
+    "name": "e-commerce(first glance at react-native) ",
+    "slug": "e-commerce-w1that",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "My first application trying with using react-native.",
+    "githubUrl": "https://github.com/w1that/react-native-first-glance"
   }
 }
