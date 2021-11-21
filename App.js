@@ -10,13 +10,17 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
+
+import categories from "./data/categories";
+import products from "./data/products";
 
 export default function App() {
   const styles = StyleSheet.create({
     container: {
       paddingTop: 50,
-      paddingHorizontal:10
+      paddingHorizontal: 10,
     },
     logos: {
       width: 30,
@@ -27,8 +31,9 @@ export default function App() {
     title: {
       fontSize: 26,
       fontWeight: "bold",
-      paddingVertical:30,
-      marginHorizontal:10
+      paddingVertical: 20,
+      marginHorizontal: 10,
+      fontFamily:'sans-serif'
     },
     categoryButton: {
       backgroundColor: "white",
@@ -49,26 +54,31 @@ export default function App() {
     },
     categoryTitle: {
       fontWeight: "bold",
-      color:'black'
+      color: "black",
     },
     selectedCategoryTitle: {
       fontWeight: "bold",
-      color:"white"
+      color: "white",
     },
-    categoriesView:{
-      
-      marginHorizontal:10
-    }
+    categoriesView: {
+      marginHorizontal: 10,
+      marginBottom: 10,
+    },
+    productImage: {
+      width: 220,
+      height: 400,
+      borderRadius: 20,
+      borderWidth: 1,
+      borderColor: "black",
+    },
+    productName: {
+      paddingVertical: 10,
+      color: "black",
+    },
+    productPrice: {
+      color: "black",
+    },
   });
-
-  const categories = [
-    { id: 1, categoryName: "All" },
-    { id: 2, categoryName: "Women" },
-    { id: 3, categoryName: "Eyewear" },
-    { id: 4, categoryName: "Watch" },
-    { id: 5, categoryName: "Men" },
-    { id: 6, categoryName: "Winter" },
-  ];
 
   const [selectedCategory, setSelectedCategory] = useState({
     id: 1,
@@ -84,19 +94,25 @@ export default function App() {
           justifyContent: "space-between",
         }}
       >
-        <Image
-          style={styles.logos}
-          source={require("./assets/threelines.png")}
-        ></Image>
+        <TouchableOpacity>
+          <Image
+            style={styles.logos}
+            source={require("./assets/threelines.png")}
+          ></Image>
+        </TouchableOpacity>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Image
-            style={styles.logos}
-            source={require("./assets/search.png")}
-          ></Image>
-          <Image
-            style={styles.logos}
-            source={require("./assets/bag.png")}
-          ></Image>
+          <TouchableOpacity>
+            <Image
+              style={styles.logos}
+              source={require("./assets/search.png")}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              style={styles.logos}
+              source={require("./assets/bag.png")}
+            ></Image>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -104,22 +120,68 @@ export default function App() {
         <Text style={styles.title}>Find your style</Text>
       </View>
 
-      <ScrollView style={styles.categoriesView} horizontal={true} showsHorizontalScrollIndicator={false}>
-        {categories.map((category) => (
-          <TouchableOpacity
-            onPress={() => setSelectedCategory(category)}
-            key={category.id}
-            style={
-              selectedCategory.categoryName == category.categoryName
-                ? styles.selectedCategoryButton
-                : styles.categoryButton
-            }
-          >
-            <Text style={selectedCategory.categoryName == category.categoryName
-                ? styles.selectedCategoryTitle
-                : styles.categoryTitle}>{category.categoryName}</Text>
-          </TouchableOpacity>
-        ))}
+      {/* categories */}
+      <SafeAreaView>
+        <ScrollView
+          style={styles.categoriesView}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          {categories.map((category) => (
+            <TouchableOpacity
+              onPress={() => setSelectedCategory(category)}
+              key={category.id}
+              style={
+                selectedCategory.categoryName == category.categoryName
+                  ? styles.selectedCategoryButton
+                  : styles.categoryButton
+              }
+            >
+              <Text
+                style={
+                  selectedCategory.categoryName == category.categoryName
+                    ? styles.selectedCategoryTitle
+                    : styles.categoryTitle
+                }
+              >
+                {category.categoryName}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
+      {/* products */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          justifyContent="center"
+        >
+          {products.map((product) => {
+            return (
+              <View key={product.id}>
+                <View
+                  style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  <TouchableOpacity activeOpacity={0.7}>
+                    <Image
+                      style={styles.productImage}
+                      source={product.imagePath}
+                      resizeMode="cover"
+                    ></Image>
+                  </TouchableOpacity>
+                  <Text style={styles.productName}>{product.productName}</Text>
+                  <Text style={styles.productPrice}>${product.price}</Text>
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
+
+      <ScrollView>
+        <Text>asdasdas</Text>
       </ScrollView>
     </SafeAreaView>
   );
