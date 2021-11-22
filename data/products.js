@@ -13,17 +13,17 @@ import eyewear3 from '../assets/eyewear3.jpg'
 
 
 const products =[
-    {id:1, productName:"watch1", imagePath:watch1, price:123, categoryId:4},
-    {id:2, productName:"watch2", imagePath:watch2, price:123, categoryId:4},
-    {id:3, productName:"watch3", imagePath:watch3, price:123, categoryId:4},
+    {id:1, productName:"GM-8010 Stainless Steel Watch", imagePath:watch1, price:184, categoryId:4},
+    {id:2, productName:"Metallic Men's Sport Tech Watch", imagePath:watch2, price:179, categoryId:4},
+    {id:3, productName:"Men's Monaco Watch", imagePath:watch3, price:144, categoryId:4},
 
-    {id:4, productName:"eyewear1", imagePath:eyewear1, price:123, categoryId:3},
-    {id:5, productName:"eyewear2", imagePath:eyewear2, price:123, categoryId:3},
-    {id:6, productName:"eyewear3", imagePath:eyewear3, price:123, categoryId:3},
+    {id:4, productName:"Translucent frame sunglasses", imagePath:eyewear1, price:142, categoryId:3},
+    {id:5, productName:"D.Franklin’s ROLLER TR90 sunglasses", imagePath:eyewear2, price:129, categoryId:3},
+    {id:6, productName:"Bold London Mole Icy Tortoise Shell Sunglasses", imagePath:eyewear3, price:99, categoryId:3},
 
-    {id:7, productName:"men1", imagePath:men1, price:123, categoryId:5},
-    {id:8, productName:"men2", imagePath:men2, price:123, categoryId:5},
-    {id:9, productName:"men3", imagePath:men3, price:123, categoryId:5},
+    {id:7, productName:"SHROOM MENS HOODIE", imagePath:men1, price:76, categoryId:5},
+    {id:8, productName:"SWEATSHIRT SMILEY GREY", imagePath:men2, price:99, categoryId:5},
+    {id:9, productName:"Nirvana Oversized Black Print Hoodie", imagePath:men3, price:89, categoryId:5},
 ]
 
 export default products

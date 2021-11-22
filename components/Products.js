@@ -27,6 +27,7 @@ export default function Products({navigation}) {
       justifyContent: "center",
       alignItems: "center",
       padding: 10,
+      width:200,
     },
   });
 
@@ -47,7 +48,7 @@ export default function Products({navigation}) {
                 source={product.imagePath}
               ></Image>
               <View style={styles.productInfo}>
-                <Text>{product.productName}</Text>
+                <Text style={{textAlign:"center"}}>{product.productName}</Text>
                 <Text style={{ fontWeight: "bold" }}>
                   ${product.price.toString()}
                 </Text>
