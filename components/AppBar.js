@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
+  Platform,
   SafeAreaView,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
-export default function AppBar() {
+export default function AppBar({setSearchInput, input}) {
   const styles = StyleSheet.create({
     appbarContainer: {
       display: "flex",
@@ -38,9 +40,10 @@ export default function AppBar() {
       justifyContent: "space-between",
     },
     leftSide: {
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      
     },
     container: {
         paddingTop: 50,
@@ -48,6 +51,7 @@ export default function AppBar() {
   });
 
   const [focused, setFocused] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
     <View style={styles.appbarContainer}>
@@ -59,12 +63,15 @@ export default function AppBar() {
       </TouchableOpacity>
       <View style={styles.leftSide}>
         <TextInput
+        value={input}
           placeholder="search"
           keyboardType="default"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          onChangeText={(text)=>setSearchInput(text)}
           style={styles.searchBar}
         />
+        
       </View>
       <View style={styles.rightSide}>
         <TouchableOpacity>
