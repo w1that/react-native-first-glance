@@ -7,7 +7,11 @@
 
 <img src="https://i.giphy.com/media/Dvvf7E7pOeqofdRwRe/giphy.webp" />
 
+### After create product detail screen:
+
+<img src="https://i.giphy.com/media/KCoCoynes52KyD6SSX/giphy.webp" />
+
 ## TODOS:
- #### When pressed on products, user will be navigated detail screen of the product.
+ #### When pressed on products, user will be navigated detail screen of the product. ✓ 
  #### The buttons on the app bar above should be interactive.
   
