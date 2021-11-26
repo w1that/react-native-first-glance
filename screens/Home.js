@@ -14,11 +14,6 @@ import PopularProducts from "../components/PopularProducts";
 import Products from "../components/Products";
 import products from "../data/products";
 
-/**<TouchableOpacity>
-            <View style={{padding:10}}>
-              <Text style={{textAlign:"center", color:"white"}}>abasbdsahbbdhs</Text>
-            </View>
-          </TouchableOpacity> */
 
 function Home({ navigation }) {
   const styles = StyleSheet.create({
@@ -29,7 +24,7 @@ function Home({ navigation }) {
       marginHorizontal: 10,
     },
     container: {
-      paddingTop: 50,
+      //paddingTop: 50,
       backgroundColor: "white",
     },
   });
@@ -64,9 +59,8 @@ function Home({ navigation }) {
             position: "absolute",
             top: 110,
             zIndex: 1,
-            left: 0,
-            right: 0,
-            margin: "auto",
+            left: '50%',
+            marginLeft:-110
           }}
         >
           {thereSearchedProduct.length > 0 ? (

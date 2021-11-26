@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Image,
   Platform,
@@ -9,8 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { CartContext } from "../contexts/cartContext";
 
-export default function AppBar({setSearchInput, input}) {
+export default function AppBar({ setSearchInput, input }) {
   const styles = StyleSheet.create({
     appbarContainer: {
       display: "flex",
@@ -43,51 +44,69 @@ export default function AppBar({setSearchInput, input}) {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      
     },
     container: {
-        paddingTop: 50,
-      },
+      paddingTop: 20,
+      //paddingTop:50 //old version
+    },
   });
 
   const [focused, setFocused] = useState(false);
+  const cartContext = useContext(CartContext);
 
   return (
     <SafeAreaView style={styles.container}>
-    <View style={styles.appbarContainer}>
-      <TouchableOpacity>
-        <Image
-          style={styles.logos}
-          source={require("../assets/threelines.png")}
-        ></Image>
-      </TouchableOpacity>
-      <View style={styles.leftSide}>
-        <TextInput
-        value={input}
-          placeholder="search"
-          keyboardType="default"
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          onChangeText={(text)=>setSearchInput(text)}
-          style={styles.searchBar}
-        />
-        
-      </View>
-      <View style={styles.rightSide}>
+      <View style={styles.appbarContainer}>
         <TouchableOpacity>
           <Image
             style={styles.logos}
-            source={require("../assets/search.png")}
+            source={require("../assets/threelines.png")}
           ></Image>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Image
-            style={styles.logos}
-            source={require("../assets/bag.png")}
-          ></Image>
-        </TouchableOpacity>
+        <View style={styles.leftSide}>
+          <TextInput
+            value={input}
+            placeholder="search"
+            keyboardType="default"
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            onChangeText={(text) => setSearchInput(text)}
+            style={styles.searchBar}
+          />
+        </View>
+        <View style={styles.rightSide}>
+          <TouchableOpacity>
+            <Image
+              style={styles.logos}
+              source={require("../assets/search.png")}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ paddingLeft: 5 }}>
+            <Image
+              style={styles.logos}
+              source={require("../assets/bag.png")}
+            ></Image>
+            <View style={{
+                position: "absolute",
+                backgroundColor: "orange",
+                padding: 2,
+                borderRadius: 50,
+                left: 2,
+                width: 20,
+                height: 20,
+                borderWidth:2,
+                borderColor:"#b0bb0b",
+                justifyContent:"center"
+              }}>
+            <Text
+              style={{fontWeight: "bold",textAlign:"center"}}
+            >
+              {cartContext.productsInCart.length>0?cartContext.productsInCart.length:''}
+            </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
     </SafeAreaView>
   );
 }

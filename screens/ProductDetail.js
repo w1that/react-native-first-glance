@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useContext, useState } from "react";
+import { Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { CartContext } from "../contexts/cartContext";
 
 function ProductDetail({ navigation, route }) {
 
   const styles = StyleSheet.create({
     mainContainer:{ paddingHorizontal: 20 },
     topBar:{ justifyContent: "space-between", flexDirection: "row" },
-    icons:{ width: 30, height: 30 },
+    icons:{ width: 30, height: 30, },
     productInfo:{
         justifyContent: "center",
         flexDirection: "column",
@@ -59,6 +60,8 @@ function ProductDetail({ navigation, route }) {
   );
   const [selectedColor, setSelectedColor] = useState("#ffffff");
   const [selectedSize, setSelectedSize] = useState('L')
+  const [liked, setLiked] = useState(false)
+  const cartContext = useContext(CartContext)
 
   function handleSelectColor(colorCode) {
     setSelectedColor(colorCode);
@@ -67,6 +70,7 @@ function ProductDetail({ navigation, route }) {
   function handleSelectSize(size){
       setSelectedSize(size)
   }
+
 
   function handleColorFieldStyle(colorCode){
     if(colorCode === selectedColor){
@@ -116,6 +120,15 @@ function ProductDetail({ navigation, route }) {
       }
   }
 
+  function handleAddProductToCart() {
+    cartContext.addProductToCart(currentProduct)
+   navigation.navigate('Home')
+   Alert.alert(
+    "Product added to cart",
+    "You can check the cart on top-right if you want."
+  );
+  }
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.topBar}>
@@ -125,10 +138,10 @@ function ProductDetail({ navigation, route }) {
             source={require("../assets/left-arrow.png")}
           ></Image>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>setLiked(!liked)}>
           <Image
             style={styles.icons}
-            source={require("../assets/like.png")}
+            source={liked?require(`../assets/redlike.png`):require(`../assets/like.png`)}
           ></Image>
         </TouchableOpacity>
       </View>
@@ -241,6 +254,7 @@ function ProductDetail({ navigation, route }) {
         <TouchableOpacity
           activeOpacity={0.7}
           style={styles.addCart}
+          onPress={handleAddProductToCart}
         >
           <Text style={{ color: "white" }}>Add to Cart</Text>
         </TouchableOpacity>
