@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -13,7 +12,6 @@ import Categories from "../components/Categories";
 import PopularProducts from "../components/PopularProducts";
 import Products from "../components/Products";
 import products from "../data/products";
-
 
 function Home({ navigation }) {
   const styles = StyleSheet.create({
@@ -33,7 +31,11 @@ function Home({ navigation }) {
   const [searchInput, setSearchInput] = useState("");
   useEffect(() => {
     products.map((product) => {
-      if (searchInput.length > 3 && product.productName.includes(searchInput) && !thereSearchedProduct.includes(product)) {
+      if (
+        searchInput.length > 3 &&
+        product.productName.includes(searchInput) &&
+        !thereSearchedProduct.includes(product)
+      ) {
         setThereSearchedProduct([...thereSearchedProduct, product]);
       }
     });
@@ -42,16 +44,20 @@ function Home({ navigation }) {
     }
   }, [searchInput]);
 
-  function handleNavigateSearched(product){
-    navigation.navigate('Product Detail', {clickedProduct:product});
-    setThereSearchedProduct([])
-    setSearchInput('')
+  function handleNavigateSearched(product) {
+    navigation.navigate("Product Detail", { clickedProduct: product });
+    setThereSearchedProduct([]);
+    setSearchInput("");
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <AppBar setSearchInput={setSearchInput} input={searchInput} navigation={navigation} />
+        <AppBar
+          setSearchInput={setSearchInput}
+          input={searchInput}
+          navigation={navigation}
+        />
         <View
           style={{
             backgroundColor: "black",
@@ -59,17 +65,22 @@ function Home({ navigation }) {
             position: "absolute",
             top: 110,
             zIndex: 1,
-            left: '50%',
-            marginLeft:-110
+            left: "50%",
+            marginLeft: -110,
           }}
         >
           {thereSearchedProduct.length > 0 ? (
-            thereSearchedProduct.map(product=>{
-             return <TouchableOpacity onPress={()=>handleNavigateSearched(product)} activeOpacity={0.7}>
-             <Text style={{ color: "white", padding:10 }}>
-              {product.productName}
-            </Text>
-             </TouchableOpacity>
+            thereSearchedProduct.map((product) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => handleNavigateSearched(product)}
+                  activeOpacity={0.7}
+                >
+                  <Text style={{ color: "white", padding: 10 }}>
+                    {product.productName}
+                  </Text>
+                </TouchableOpacity>
+              );
             })
           ) : (
             <></>
@@ -79,7 +90,7 @@ function Home({ navigation }) {
           <Text style={styles.title}>Find your style</Text>
         </View>
 
-        <Categories />
+        <Categories navigation={navigation} />
         <Products navigation={navigation} />
 
         <PopularProducts navigation={navigation} />

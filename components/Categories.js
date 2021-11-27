@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import categories from "../data/categories";
 
-export default function Categories() {
+export default function Categories({navigation}) {
   const styles = StyleSheet.create({
     categoryButton: {
       backgroundColor: "white",
@@ -45,6 +45,16 @@ export default function Categories() {
     id: 1,
     categoryName: "All",
   });
+
+  useEffect(() => {
+    if(selectedCategory.id!==1){
+      navigation.navigate('Selected Category Screen', {category:selectedCategory})
+      setSelectedCategory({
+        id: 1,
+        categoryName: "All",
+      })
+    }
+  }, [selectedCategory])
 
   return (
     <View>

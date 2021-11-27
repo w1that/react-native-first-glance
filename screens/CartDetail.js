@@ -8,18 +8,19 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import ProductInCart from "../components/ProductInCart";
 import { CartContext } from "../contexts/cartContext";
 
 function CartDetail({ navigation }) {
-    const cartContext = useContext(CartContext)
-    const [totalPrice, setTotalPrice] = useState(0)
+  const cartContext = useContext(CartContext);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    useEffect(() => {
-        cartContext.productsInCart.forEach(productInCart => {
-            setTotalPrice(prevTotalPrice=>prevTotalPrice+productInCart.price) 
-        });
-    }, [])
-    
+  useEffect(() => {
+    cartContext.productsInCart.forEach((productInCart) => {
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + productInCart.price);
+    });
+  }, []);
+
   return (
     <SafeAreaView>
       <View
@@ -35,29 +36,53 @@ function CartDetail({ navigation }) {
             backgroundColor: "white",
             flex: 15,
             width: "100%",
-            paddingTop:30,
-            alignItems:"center"
+            paddingTop: 30,
+            alignItems: "center",
           }}
         >
-        
-      
-      <Text style={{fontSize:30, fontWeight:"500",marginBottom:20 }}>Cart</Text>
-          <View style={{backgroundColor:"black", padding:20, position:"absolute", right:10, top:10,borderRadius:15, borderWidth:2, borderColor:"rgba(104, 255, 0, 0.8)"}}>
-              <Text style={{color:"white"}}>Total: ${totalPrice}</Text>
-          </View>
-    
-          <ScrollView contentContainerStyle={{justifyContent:"center", alignItems:"center"}} showsVerticalScrollIndicator={false}>
-          {cartContext.productsInCart.length!==0?cartContext.productsInCart.map(productInCart=>{
-              return (
-                <TouchableOpacity activeOpacity={0.7} key={productInCart.id} style={{width:"94%", marginBottom:10, backgroundColor:"white",borderWidth:1, height:100, borderRadius:20, flexDirection:"row", alignItems:"center",justifyContent:"space-between", paddingRight:20}}>
-              <Image style={{ width:90,height:90, resizeMode:"stretch", borderRadius:16, marginLeft:5 }} source={productInCart.imagePath} />
-            <Text style={{fontWeight:"500", fontSize:20, width:"50%"}}>{productInCart.productName}</Text>
-            <Text style={{fontWeight:"500", fontSize:20,marginRight:6}}>${productInCart.price}</Text>
-          </TouchableOpacity>
-              )
-          }):<Text>Shop first, checkout later</Text>}
+          <Text style={{ fontSize: 30, fontWeight: "500", marginBottom: 20 }}>
+            Cart
+          </Text>
+          {cartContext.productsInCart.length === 0 ? (
+            <></>
+          ) : (
+            <View
+              style={{
+                backgroundColor: "black",
+                padding: 20,
+                position: "absolute",
+                right: 10,
+                top: 10,
+                borderRadius: 15,
+                borderWidth: 2,
+                borderColor: "rgba(104, 255, 0, 0.8)",
+              }}
+            >
+              <Text style={{ color: "white" }}>Total: ${totalPrice}</Text>
+            </View>
+          )}
+
+          <ScrollView
+            contentContainerStyle={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            showsVerticalScrollIndicator={false}
+            horizontal={false}
+          >
+            {cartContext.productsInCart.length !== 0 ? (
+              cartContext.productsInCart.map((productInCart) => {
+                return (
+                  <ProductInCart
+                    productInCart={productInCart}
+                    navigation={navigation}
+                  />
+                );
+              })
+            ) : (
+              <Text>Shop first, checkout later</Text>
+            )}
           </ScrollView>
-          
         </View>
         <View
           style={{
@@ -69,10 +94,8 @@ function CartDetail({ navigation }) {
             backgroundColor: "white",
             paddingTop: 10,
             borderRadius: 20,
-            borderTopColor:"black",
-            borderTopWidth:1,
-            
-            
+            borderTopColor: "black",
+            borderTopWidth: 1,
           }}
         >
           <TouchableOpacity
@@ -92,22 +115,26 @@ function CartDetail({ navigation }) {
             />
             <Text style={{ fontWeight: "bold" }}>Continue Shopping</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={{
-              alignItems: "center",
-              backgroundColor: "white",
-              paddingHorizontal: 14,
-              paddingVertical: 10,
-              borderRadius: 20,
-            }}
-          >
-            <Image
-              style={{ width: 50, height: 50 }}
-              source={require("../assets/checkout.png")}
-            />
-            <Text style={{ fontWeight: "bold" }}>Complete transaction</Text>
-          </TouchableOpacity>
+          {cartContext.productsInCart.length === 0 ? (
+            <TouchableOpacity></TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                alignItems: "center",
+                backgroundColor: "white",
+                paddingHorizontal: 14,
+                paddingVertical: 10,
+                borderRadius: 20,
+              }}
+            >
+              <Image
+                style={{ width: 50, height: 50 }}
+                source={require("../assets/checkout.png")}
+              />
+              <Text style={{ fontWeight: "bold" }}>Complete transaction</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </SafeAreaView>
