@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import ProductDetail from "./screens/ProductDetail";
 import { CartContext } from "./contexts/cartContext";
+import CartDetail from "./screens/CartDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
         >
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Product Detail" component={ProductDetail} />
+          <Stack.Screen name="Cart Detail" component={CartDetail}/>
         </Stack.Navigator>
       </CartContext.Provider>
     </NavigationContainer>

@@ -51,7 +51,7 @@ function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <AppBar setSearchInput={setSearchInput} input={searchInput} />
+        <AppBar setSearchInput={setSearchInput} input={searchInput} navigation={navigation} />
         <View
           style={{
             backgroundColor: "black",

@@ -121,12 +121,22 @@ function ProductDetail({ navigation, route }) {
   }
 
   function handleAddProductToCart() {
+   
+
+  if(cartContext.productsInCart.includes(currentProduct)){
+    return  Alert.alert(
+      "This product is already in the cart",
+      "Check your cart before add one more."
+    );
+  }
+  else{
     cartContext.addProductToCart(currentProduct)
-   navigation.navigate('Home')
-   Alert.alert(
-    "Product added to cart",
-    "You can check the cart on top-right if you want."
-  );
+    navigation.navigate('Home')
+    Alert.alert(
+     "Product added to cart",
+     "You can check the cart on top-right if you want."
+   );
+  }
   }
 
   return (

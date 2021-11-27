@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { CartContext } from "../contexts/cartContext";
 
-export default function AppBar({ setSearchInput, input }) {
+export default function AppBar({ setSearchInput, input, navigation }) {
   const styles = StyleSheet.create({
     appbarContainer: {
       display: "flex",
@@ -81,7 +81,7 @@ export default function AppBar({ setSearchInput, input }) {
               source={require("../assets/search.png")}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity style={{ paddingLeft: 5 }}>
+          <TouchableOpacity style={{ paddingLeft: 5 }} onPress={()=>navigation.navigate('Cart Detail')}>
             <Image
               style={styles.logos}
               source={require("../assets/bag.png")}
