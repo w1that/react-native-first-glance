@@ -93,9 +93,9 @@ function CartDetail({ navigation }) {
             paddingBottom: 60,
             backgroundColor: "white",
             paddingTop: 10,
-            borderRadius: 20,
             borderTopColor: "black",
             borderTopWidth: 1,
+            opacity:0.9,
           }}
         >
           <TouchableOpacity
@@ -113,7 +113,6 @@ function CartDetail({ navigation }) {
               style={{ width: 50, height: 50 }}
               source={require("../assets/left-arrow.png")}
             />
-            <Text style={{ fontWeight: "bold" }}>Continue Shopping</Text>
           </TouchableOpacity>
           {cartContext.productsInCart.length === 0 ? (
             <TouchableOpacity></TouchableOpacity>
@@ -132,7 +131,6 @@ function CartDetail({ navigation }) {
                 style={{ width: 50, height: 50 }}
                 source={require("../assets/checkout.png")}
               />
-              <Text style={{ fontWeight: "bold" }}>Complete transaction</Text>
             </TouchableOpacity>
           )}
         </View>

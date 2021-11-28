@@ -86,7 +86,7 @@ export default function AppBar({ setSearchInput, input, navigation }) {
               style={styles.logos}
               source={require("../assets/bag.png")}
             ></Image>
-            <View style={{
+            {cartContext.productsInCart.length===0?<></>:<View style={{
                 position: "absolute",
                 backgroundColor: "orange",
                 padding: 2,
@@ -103,7 +103,7 @@ export default function AppBar({ setSearchInput, input, navigation }) {
             >
               {cartContext.productsInCart.length>0?cartContext.productsInCart.length:''}
             </Text>
-            </View>
+            </View>}
           </TouchableOpacity>
         </View>
       </View>
