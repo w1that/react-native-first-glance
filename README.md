@@ -15,8 +15,6 @@
 
 <img src="https://media1.giphy.com/media/3MOAIKpsPtqmkPWWRP/giphy.gif?cid=790b761135d4f7226b2352dc4c9b4eea09d735ec8a573730&rid=giphy.gif&ct=g" />
 
-## TODOS:
- #### When pressed on products, user will be navigated detail screen of the product. ✓ 
- #### Do search bar useful. ✓ 
- #### The buttons on the app bar above should be interactive.
-  
+### Final sight:
+
+<img src="https://i.giphy.com/media/mJl8DehHz2bXcIjdLj/giphy-downsized-large.gif"/>
